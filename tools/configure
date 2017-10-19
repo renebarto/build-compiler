@@ -1,0 +1,52 @@
+#!/bin/bash
+
+package_name=$1
+
+root_directory=$(pwd)
+script_directory="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+cd $root_directory
+
+source $script_directory/functions
+source $script_directory/install-functions
+
+. $root_directory/package/$package_name/package
+
+. $root_directory/tools/setenv
+
+echo_color yellow "Configuring $package_fullname-$version"
+
+run_command "mkdir -pv $build_directory"
+run_command "cd $build_directory"
+
+if [ -f $root_directory/package/$package_name/gettextize ]; then
+	echo_color yellow "Gettextizing $package_fullname-$version"
+	. $root_directory/package/$package_name/gettextize
+	if [ $? -ne 0 ]; then
+	  echo_color red "Gettextizing $package_fullname-$version failed!"
+	  exit 1
+	fi
+fi
+
+if [ -f $root_directory/package/$package_name/autoreconfigure ]; then
+	echo_color yellow "Auto-reconfiguring $package_fullname-$version"
+	. $root_directory/package/$package_name/autoreconfigure
+	if [ $? -ne 0 ]; then
+	  echo_color red "Auto-reconfiguring $package_fullname-$version failed!"
+	  exit 1
+	fi
+fi
+
+patch_libtool
+if [ $? -ne 0 ]; then
+  exit 1
+fi
+
+run_command "rm -rf config.cache"
+
+. $root_directory/package/$package_name/configure
+if [ $? -ne 0 ]; then
+  echo_color red "Configuring $package_fullname-$version failed!"
+  exit 1
+fi
+
+run_command "touch $build_directory/.stamp_configured"
