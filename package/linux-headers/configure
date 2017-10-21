@@ -1,0 +1,10 @@
+#!/bin/bash
+
+PATH="$host_directory/bin:$host_directory/sbin:$host_directory/usr/bin:$host_directory/usr/sbin:$PATH" \
+/usr/bin/make -j5 \
+  ARCH=arm \
+  HOSTCC="/usr/bin/gcc" \
+  HOSTCFLAGS="" \
+  HOSTCXX="/usr/bin/g++" \
+  INSTALL_HDR_PATH=$build_directory/usr \
+  headers_install

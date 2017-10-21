@@ -1,0 +1,3 @@
+#!/bin/bash
+
+echo_color yellow "Buidling $package_fullname-$version not needed"

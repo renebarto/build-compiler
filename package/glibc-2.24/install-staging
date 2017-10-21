@@ -1,0 +1,7 @@
+#!/bin/bash
+
+PATH="$staging_directory/bin:$staging_directory/sbin:$staging_directory/usr/bin:$staging_directory/usr/sbin:$PATH" \
+/usr/bin/make -j5 \
+  install_root=$staging_directory install \
+  -C $build_directory/build/
+

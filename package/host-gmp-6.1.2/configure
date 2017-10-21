@@ -1,0 +1,33 @@
+#!/bin/bash
+
+PATH="$_PATH_HOST" AR="$_AR" AS="$_AS" LD="$_LD" NM="$_NM" \
+PKG_CONFIG="/usr/bin/pkg-config" \
+PKG_CONFIG_SYSROOT_DIR="/" \
+PKG_CONFIG_ALLOW_SYSTEM_CFLAGS=1 \
+PKG_CONFIG_ALLOW_SYSTEM_LIBS=1 \
+PKG_CONFIG_LIBDIR="$host_directory/usr/lib/pkgconfig:$host_directory/usr/share/pkgconfig" \
+AR="/usr/bin/ar" \
+AS="/usr/bin/as" \
+LD="/usr/bin/ld" \
+NM="/usr/bin/nm" \
+CC="/usr/bin/gcc" \
+GCC="/usr/bin/gcc" \
+CXX="/usr/bin/g++" \
+CPP="/usr/bin/cpp" \
+OBJCOPY="/usr/bin/objcopy" \
+RANLIB="/usr/bin/ranlib" \
+CPPFLAGS="-I$host_directory/usr/include" \
+CFLAGS="-O2 -I$host_directory/usr/include" \
+CXXFLAGS="-O2 -I$host_directory/usr/include" \
+LDFLAGS="-L$host_directory/lib -L$host_directory/usr/lib -Wl,-rpath,$host_directory/usr/lib" \
+INTLTOOL_PERL=/usr/bin/perl \
+CFLAGS="-O2 -I$host_directory/usr/include" \
+LDFLAGS="-L$host_directory/lib -L$host_directory/usr/lib -Wl,-rpath,$staging_directory/usr/lib" \
+CONFIG_SITE=/dev/null \
+./configure \
+    --prefix="/usr" \
+    --sysconfdir="/etc" \
+    --localstatedir="/var" \
+    --enable-shared \
+    --disable-static
+    

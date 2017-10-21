@@ -1,0 +1,6 @@
+*.log
+build/
+download/
+output*/
+hello-world-*
+main.cpp

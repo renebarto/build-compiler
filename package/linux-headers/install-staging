@@ -1,0 +1,11 @@
+#!/bin/bash
+
+PATH="$staging_directory/bin:$staging_directory/sbin:$staging_directory/usr/bin:$staging_directory/usr/sbin:$PATH" \
+/usr/bin/make -j5 \
+  ARCH=arm \
+  HOSTCC="/usr/bin/gcc" \
+  HOSTCFLAGS="" \
+  HOSTCXX="/usr/bin/g++" \
+  INSTALL_HDR_PATH=$staging_directory/usr \
+  headers_install
+

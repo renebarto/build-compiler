@@ -1,0 +1,3 @@
+#!/bin/bash
+
+echo_color yellow "Installing $package_fullname-$version to target not needed"

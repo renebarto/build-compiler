@@ -1,0 +1,79 @@
+#!/bin/bash
+
+run_command "rm -rf $build_directory/build/"
+run_command "mkdir $build_directory/build"
+run_command "cd $build_directory/build"
+run_command "rm -rf config.cache"
+
+PATH="$_PATH_HOST" AR="$_AR" AS="$_AS" LD="$_LD" NM="$_NM" \
+PKG_CONFIG="/usr/bin/pkg-config" \
+PKG_CONFIG_SYSROOT_DIR="/" \
+PKG_CONFIG_ALLOW_SYSTEM_CFLAGS=1 \
+PKG_CONFIG_ALLOW_SYSTEM_LIBS=1 \
+PKG_CONFIG_LIBDIR="$host_directory/usr/lib/pkgconfig:$host_directory/usr/share/pkgconfig" \
+AR="/usr/bin/ar" \
+AS="/usr/bin/as" \
+LD="/usr/bin/ld" \
+NM="/usr/bin/nm" \
+CC="/usr/bin/gcc" \
+GCC="/usr/bin/gcc" \
+CXX="/usr/bin/g++" \
+CPP="/usr/bin/cpp" \
+OBJCOPY="/usr/bin/objcopy" \
+RANLIB="/usr/bin/ranlib" \
+CPPFLAGS="-I$host_directory/usr/include" \
+CFLAGS="-O2 -I$host_directory/usr/include" \
+CXXFLAGS="-O2 -I$host_directory/usr/include" \
+LDFLAGS="-L$host_directory/lib -L$host_directory/usr/lib -Wl,-rpath,$host_directory/usr/lib" \
+INTLTOOL_PERL=/usr/bin/perl \
+CFLAGS="-O2 -I$host_directory/usr/include" \
+LDFLAGS="-L$host_directory/lib -L$host_directory/usr/lib -Wl,-rpath,$host_directory/usr/lib" \
+MAKEINFO=missing \
+CFLAGS_FOR_TARGET="-D_LARGEFILE_SOURCE -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64  -O2 " \
+CXXFLAGS_FOR_TARGET="-D_LARGEFILE_SOURCE -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64  -O2 " \
+CONFIG_SITE=/dev/null \
+../configure \
+    --prefix="$host_directory/usr" \
+    --sysconfdir="$host_directory/etc" \
+    --localstatedir="$host_directory/var" \
+    --enable-shared \
+    --disable-static \
+    --disable-gtk-doc \
+    --disable-gtk-doc-html \
+    --disable-doc \
+    --disable-docs \
+    --disable-documentation \
+    --disable-debug \
+    --with-xmlto=no \
+    --with-fop=no \
+    --disable-dependency-tracking \
+    --target=arm-build-linux-gnueabihf \
+    --with-sysroot=$host_directory/usr/arm-build-linux-gnueabihf/sysroot \
+    --disable-__cxa_atexit \
+    --with-gnu-ld \
+    --disable-libssp \
+    --disable-multilib \
+    --with-gmp=$host_directory/usr \
+    --with-mpc=$host_directory/usr \
+    --with-mpfr=$host_directory/usr \
+    --with-pkgversion="special" \
+    --disable-libquadmath \
+    --enable-tls \
+    --disable-libmudflap \
+    --enable-threads \
+    --without-isl \
+    --without-cloog \
+    --disable-decimal-float \
+    --with-abi="aapcs-linux" \
+    --with-cpu=cortex-a53 \
+    --with-fpu=neon-vfpv4 \
+    --with-float=hard \
+    --with-mode=thumb \
+    --enable-languages=c \
+    --disable-shared \
+    --without-headers \
+    --disable-threads \
+    --with-newlib \
+    --disable-largefile \
+    --disable-nls
+

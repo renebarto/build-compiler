@@ -1,0 +1,11 @@
+#!/bin/bash
+
+PATH="$_PATH" \
+PKG_CONFIG="/usr/bin/pkg-config" \
+PKG_CONFIG_SYSROOT_DIR="/" \
+PKG_CONFIG_ALLOW_SYSTEM_CFLAGS=1 \
+PKG_CONFIG_ALLOW_SYSTEM_LIBS=1 \
+PKG_CONFIG_LIBDIR="$staging_directory/usr/lib/pkgconfig:$staging_directory/usr/share/pkgconfig" \
+/usr/bin/make -j5 \
+  -C $build_directory
+  

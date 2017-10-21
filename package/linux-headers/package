@@ -1,0 +1,7 @@
+#!/bin/bash
+
+package_fullname=linux-headers
+package=linux-headers
+version=8bf13deebd582fd64a6595d23e9c965b652ef7c8
+package_source=$package-$version.tar.gz
+package_url=https://github.com/raspberrypi/linux/archive/$version/$package_source

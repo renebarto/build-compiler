@@ -1,0 +1,8 @@
+#!/bin/bash
+
+package_fullname=gcc-initial
+package=gcc
+version=5.4.0
+package_source=$package-$version.tar.bz2
+package_url=http://ftpmirror.gnu.org/$package/$package-$version/$package_source
+host_package=yes

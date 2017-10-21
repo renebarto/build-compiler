@@ -1,0 +1,65 @@
+#!/bin/bash
+
+run_command "rm -rf $build_directory/build/"
+run_command "mkdir $build_directory/build"
+run_command "cd $build_directory/build"
+run_command "rm -rf config.cache"
+
+PATH="$_PATH_HOST" \
+AR="$host_directory/usr/bin/arm-build-linux-gnueabihf-ar" \
+AS="$host_directory/usr/bin/arm-build-linux-gnueabihf-as" \
+LD="$host_directory/usr/bin/arm-build-linux-gnueabihf-ld" \
+NM="$host_directory/usr/bin/arm-build-linux-gnueabihf-nm" \
+CC="$host_directory/usr/bin/arm-build-linux-gnueabihf-gcc" \
+GCC="$host_directory/usr/bin/arm-build-linux-gnueabihf-gcc" \
+CPP="$host_directory/usr/bin/arm-build-linux-gnueabihf-cpp" \
+CXX="$host_directory/usr/bin/arm-build-linux-gnueabihf-g++" \
+FC="$host_directory/usr/bin/arm-build-linux-gnueabihf-gfortran" \
+F77="$host_directory/usr/bin/arm-build-linux-gnueabihf-gfortran" \
+RANLIB="$host_directory/usr/bin/arm-build-linux-gnueabihf-ranlib" \
+READELF="$host_directory/usr/bin/arm-build-linux-gnueabihf-readelf" \
+STRIP="$host_directory/usr/bin/arm-build-linux-gnueabihf-strip" \
+OBJCOPY="$host_directory/usr/bin/arm-build-linux-gnueabihf-objcopy" \
+OBJDUMP="$host_directory/usr/bin/arm-build-linux-gnueabihf-objdump" \
+AR_FOR_BUILD="/usr/bin/ar" \
+AS_FOR_BUILD="/usr/bin/as" \
+CC_FOR_BUILD="/usr/bin/gcc" \
+GCC_FOR_BUILD="/usr/bin/gcc" \
+CXX_FOR_BUILD="/usr/bin/g++" \
+LD_FOR_BUILD="/usr/bin/ld" \
+CPPFLAGS_FOR_BUILD="-I$host_directory/usr/include" \
+CFLAGS_FOR_BUILD="-O2 -I$host_directory/usr/include" \
+CXXFLAGS_FOR_BUILD="-O2 -I$host_directory/usr/include" \
+LDFLAGS_FOR_BUILD="-L$host_directory/lib -L$host_directory/usr/lib -Wl,-rpath,$host_directory/usr/lib" \
+FCFLAGS_FOR_BUILD="" \
+DEFAULT_ASSEMBLER="$host_directory/usr/bin/arm-build-linux-gnueabihf-as" \
+DEFAULT_LINKER="$host_directory/usr/bin/arm-build-linux-gnueabihf-ld" \
+CPPFLAGS="-D_LARGEFILE_SOURCE -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64" \
+CFLAGS="-D_LARGEFILE_SOURCE -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64  -O2 " \
+CXXFLAGS="-D_LARGEFILE_SOURCE -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64  -O2 " \
+LDFLAGS="" \
+FCFLAGS=" -O2 " \
+FFLAGS=" -O2 " \
+PKG_CONFIG="/usr/bin/pkg-config" \
+STAGING_DIR="$staging_directory" \
+INTLTOOL_PERL=/usr/bin/perl \
+CFLAGS="-O2 " \
+CPPFLAGS="" \
+CXXFLAGS="-O2 " \
+../configure \
+    ac_cv_path_BASH_SHELL=/bin/bash \
+    libc_cv_forced_unwind=yes \
+    libc_cv_ssp=no \
+    --target=arm-build-linux-gnueabihf \
+    --host=arm-build-linux-gnueabihf \
+    --build=x86_64-pc-linux-gnu \
+    --prefix="/usr" \
+    --enable-shared \
+    --with-fp \
+    --with-pkgversion="special" \
+    --without-cvs \
+    --disable-profile \
+    --without-gd \
+    --enable-obsolete-rpc \
+    --enable-kernel=4.9 \
+    --with-headers=$staging_directory/usr/include

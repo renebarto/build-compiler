@@ -1,0 +1,12 @@
+#!/bin/bash
+
+PATH="$host_directory/bin:$host_directory/sbin:$host_directory/usr/bin:$host_directory/usr/sbin:$PATH" \
+PKG_CONFIG="$host_directory/usr/bin/pkg-config" \
+PKG_CONFIG_SYSROOT_DIR="/" \
+PKG_CONFIG_ALLOW_SYSTEM_CFLAGS=1 \
+PKG_CONFIG_ALLOW_SYSTEM_LIBS=1 \
+PKG_CONFIG_LIBDIR="$host_directory/usr/lib/pkgconfig:$host_directory/usr/share/pkgconfig" \
+/usr/bin/make -j5 \
+  install-gcc install-target-libgcc \
+  -C $build_directory/build/
+

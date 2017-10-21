@@ -1,0 +1,8 @@
+#!/bin/bash
+
+package_fullname=gcc-final
+package=gcc
+version=7.2.0
+package_source=$package-$version.tar.xz
+package_url=http://ftpmirror.gnu.org/$package/$package-$version/$package_source
+host_package=yes

@@ -13,23 +13,47 @@ source $root_directory/tools/install-functions
 
 . $root_directory/tools/setenv
 
-echo_color yellow "Installing $package_fullname-$version to staging"
+if [ -n "$host_package" ]; then
+  echo_color yellow "Installing $package_fullname-$version to host"
 
-run_command "cd $build_directory"
+  run_command "cd $build_directory"
 
-if [ -f $root_directory/package/$package_name/install-staging ]; then
-  . $root_directory/package/$package_name/install-staging
+  if [ -f $root_directory/package/$package_name/install-host ]; then
+    . $root_directory/package/$package_name/install-host
+  else
+    install_files install $host_directory
+  fi
+  if [ $? -ne 0 ]; then
+    echo_color red "Installing $package_fullname-$version to host failed!"
+    exit 1
+  fi
+
+  if [ -f $root_directory/package/$package_name/post-install-host ]; then
+    echo_color green "Running post-install-host"
+    . $root_directory/package/$package_name/post-install-host
+  fi
+
+  run_command "touch $build_directory/.stamp_host_installed"
 else
-  install_files install $staging_directory
-fi
-if [ $? -ne 0 ]; then
-  echo_color red "Installing $package_fullname-$version to staging failed!"
-  exit 1
+  echo_color yellow "Installing $package_fullname-$version to staging"
+
+  run_command "cd $build_directory"
+
+  if [ -f $root_directory/package/$package_name/install-staging ]; then
+    . $root_directory/package/$package_name/install-staging
+  else
+    install_files install $staging_directory
+  fi
+  if [ $? -ne 0 ]; then
+    echo_color red "Installing $package_fullname-$version to staging failed!"
+    exit 1
+  fi
+
+  if [ -f $root_directory/package/$package_name/post-install-staging ]; then
+    echo_color green "Running post-install-staging"
+    . $root_directory/package/$package_name/post-install-staging
+  fi
+
+  run_command "touch $build_directory/.stamp_installed"
 fi
 
-if [ -f $root_directory/package/$package_name/post-install-staging ]; then
-  echo_color green "Running post-install-staging"
-  . $root_directory/package/$package_name/post-install-staging
-fi
-
-run_command "touch $build_directory/.stamp_installed"

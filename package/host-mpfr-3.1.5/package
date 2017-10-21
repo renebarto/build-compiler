@@ -1,0 +1,8 @@
+#!/bin/bash
+
+package_fullname=mpfr
+package=mpfr
+version=3.1.5
+package_source=$package-$version.tar.xz
+package_url=http://www.mpfr.org/$package-$version/$package_source
+host_package=yes

@@ -2,6 +2,7 @@
 
 package_fullname=binutils
 package=binutils
-version=2.26.1
+version=2.29.1
 package_source=$package-$version.tar.bz2
 package_url=http://ftpmirror.gnu.org/$package/$package_source
+host_package=yes

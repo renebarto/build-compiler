@@ -1,0 +1,8 @@
+#!/bin/bash
+
+package_fullname=mpc
+package=mpc
+version=1.0.3
+package_source=$package-$version.tar.gz
+package_url=http://ftpmirror.gnu.org/$package/$package_source
+host_package=yes
